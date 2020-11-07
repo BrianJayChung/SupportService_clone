@@ -1,0 +1,47 @@
+__pycache__/
+.DS_Store
+.env
+.flaskenv
+*.pyc
+*.pyo
+venv/
+venv*
+build/
+*.egg
+*.egg-info/
+_mailinglist
+.tox/
+.cache/
+.pytest_cache/
+.idea/
+docs/_build/
+data/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+*,cover
+test-reports/
+
+# Misc
+*.swp
+*.db
+venv/
+*.env
+*.zip
+.vscode/*
+!.vscode/extensions.json
+
+# Generated Files
+docker-compose.prod.yml
+nginx.conf
+
+# Java
+target/
+.settings/
+.classpath
+.project
+
+# JavaScript
+node_modules

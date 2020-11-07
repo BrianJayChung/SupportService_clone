@@ -1,0 +1,19 @@
+{% extends "main.html" %}
+
+{% block content %}
+    <div id="wrapper">
+        {% include "shared/nps.html" %}
+    </div>
+{% endblock %}
+{% block footer %}
+{{ super() }}
+
+<script>
+    ldclient.identify({{ random_user | safe }}, null, function() {
+        console.log("New user's flags available");
+    });
+</script>
+
+<!-- js file for the click logic on the nps survey pop-up -->
+<script src="{{ url_for('static', filename='shared/js/nps.js') }}"></script>
+{% endblock %}

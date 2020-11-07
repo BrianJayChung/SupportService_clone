@@ -1,0 +1,50 @@
+{% extends "main.html" %}
+
+{% block content %}
+<div id="wrapper">
+        <!-- Navigation -->
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header">All Known Users</h3>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <div class="row">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>ID</td>
+                            <td>Email</td>
+                            <td>User Type</td>
+                            <td>Company</td>
+                            <td>State</td>
+                            <td>Country</td>
+                            <td>Plan</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td>{{user.id}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.user_type}}</td>
+                            <td>{{user.company}}</td>
+                            <td>{{user.state}}</td>
+                            <td>{{user.country}}</td>
+                            <td>{{user.plan.name}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% if prev_url %}
+                    <strong><a class="btn btn-default" href="{{ prev_url }}"><i class="fas fa-arrow-left"></i> Previous Users</a></strong>
+                {% endif %}
+                {% if next_url %}
+                    <strong><a class="btn btn-default pull-right" href="{{ next_url }}">Next Users <i class="fas fa-arrow-right"></i></a></strong>
+                {% endif %}
+            </div>
+        </div>
+        <!-- /#page-wrapper -->
+    </div> 
+{% endblock %}

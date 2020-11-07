@@ -1,0 +1,10 @@
+-r requirements.txt
+
+coverage
+flake8
+pylint
+unittest-xml-reporting
+codecov
+python-dotenv
+fakeredis
+black==19.10b0

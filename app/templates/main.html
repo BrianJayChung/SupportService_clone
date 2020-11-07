@@ -1,0 +1,96 @@
+<!doctype html>
+
+{% block head %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="LaunchDarkly SupportService Demo Site">
+    <meta name="author" content="Sales Engineering Team">
+
+    <title>SupportService - {{ title }}</title>
+    <link id="favicon" rel="icon" type="image/x-icon" href="{{ url_for('static', filename='shared/images/favicon.ico') }}">
+{% endblock head %}
+{% block header %}
+    <!-- Footer -->
+    {% include 'partials/head.html' %}
+{% endblock header %}
+
+{% block css %}
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ url_for('static', filename='light/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="{{ url_for('static', filename='light/vendor/metisMenu/metisMenu.min.css') }}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='light/dist/css/sb-admin-2.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='shared/css/custom.css') }}" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="{{ url_for('static', filename='light/vendor/morrisjs/morris.css') }}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+{% endblock css %}
+
+{% block headerJS %}
+    <!-- jQuery -->
+    <script src="{{ url_for('static', filename='light/vendor/jquery/jquery.min.js') }}"></script>
+
+   <!-- Custom Theme JavaScript -->
+   <script src="{{ url_for('static', filename='light/dist/js/sb-admin-2.min.js') }}"></script>
+
+
+
+    <!-- Amplitude Javascript Import -->
+    <script type="text/javascript">
+        (function(e,t){var n=e.amplitude||{_q:[],_iq:{}};var r=t.createElement("script")
+        ;r.type="text/javascript"
+        ;r.integrity="sha384-girahbTbYZ9tT03PWWj0mEVgyxtZoyDF9KVZdL+R53PP5wCY0PiVUKq0jeRlMx9M"
+        ;r.crossOrigin="anonymous";r.async=true
+        ;r.src="https://cdn.amplitude.com/libs/amplitude-7.2.1-min.gz.js"
+        ;r.onload=function(){if(!e.amplitude.runQueuedFunctions){
+        console.log("[Amplitude] Error: could not load SDK")}}
+        ;var i=t.getElementsByTagName("script")[0];i.parentNode.insertBefore(r,i)
+        ;function s(e,t){e.prototype[t]=function(){
+        this._q.push([t].concat(Array.prototype.slice.call(arguments,0)));return this}}
+        var o=function(){this._q=[];return this}
+        ;var a=["add","append","clearAll","prepend","set","setOnce","unset"]
+        ;for(var c=0;c<a.length;c++){s(o,a[c])}n.Identify=o;var u=function(){this._q=[]
+        ;return this}
+        ;var l=["setProductId","setQuantity","setPrice","setRevenueType","setEventProperties"]
+        ;for(var p=0;p<l.length;p++){s(u,l[p])}n.Revenue=u
+        ;var d=["init","logEvent","logRevenue","setUserId","setUserProperties","setOptOut","setVersionName","setDomain","setDeviceId","enableTracking","setGlobalUserProperties","identify","clearUserProperties","setGroup","logRevenueV2","regenerateDeviceId","groupIdentify","onInit","logEventWithTimestamp","logEventWithGroups","setSessionId","resetSessionId"]
+        ;function v(e){function t(t){e[t]=function(){
+        e._q.push([t].concat(Array.prototype.slice.call(arguments,0)))}}
+        for(var n=0;n<d.length;n++){t(d[n])}}v(n);n.getInstance=function(e){
+        e=(!e||e.length===0?"$default_instance":e).toLowerCase()
+        ;if(!n._iq.hasOwnProperty(e)){n._iq[e]={_q:[]};v(n._iq[e])}return n._iq[e]}
+        ;e.amplitude=n})(window,document);
+        
+        amplitude.getInstance().init("5521c406e67cc6d1af3ebc234e847c9b");
+        amplitude.getInstance().logEvent('Viewing Main Page');
+
+
+        </script>
+
+
+
+{% endblock headerJS %}
+
+{% block navbar %}
+    <!-- Nav -->
+    {%  include 'partials/nav.html' %}
+{%- endblock navbar %}
+
+{% block content %}
+    <!-- Content -->
+{% endblock content %}
+
+<!-- Chat -->
+{%  include 'partials/chat.html' %}
+
+{% block footer %}
+    <!-- Footer -->
+    {% include 'partials/footer.html' %}
+{% endblock footer %}
