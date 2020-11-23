@@ -10,10 +10,10 @@ workflows:
       - aws-ecr/build-and-push-image:
           repo: "${AWS_ECR_REPO}"
           path: .
-      - aws-ecs/deploy-service-update:
-          requires:
-            - aws-ecr/build-and-push-image
-          family: "${AWS_TASK_DEFINITION}"
-          service-name: "${AWS_SERVICE_NAME}"
-          cluster-name: "${AWS_ECS_CLUSTER_ARN}"
-          force-new-deployment: true
+      # - aws-ecs/deploy-service-update:
+      #     requires:
+      #       - aws-ecr/build-and-push-image
+      #     family: "${AWS_TASK_DEFINITION}"
+      #     service-name: "${AWS_SERVICE_NAME}"
+      #     cluster-name: "${AWS_ECS_CLUSTER_ARN}"
+      #     force-new-deployment: true
