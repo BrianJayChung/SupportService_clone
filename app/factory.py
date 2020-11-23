@@ -59,7 +59,7 @@ class SubdomainDispatcher(object):
                 app = make_app(self.ld, self.rclient, subdomain, self.config_name)
                 # If environment does not exist in Redis
                 if app is None:
-                    return Response("This is root, please specify a subdomain, v1")
+                    return Response("This is root, please specify a subdomain, v2")
                 else:
                     self.instances[subdomain] = app
             return app
