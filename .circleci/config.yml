@@ -5,21 +5,24 @@ orbs:
   aws-ecr: circleci/aws-ecr@6.14.0
   aws-ecs: circleci/aws-ecs@01.4.0
 
+jobs:
+  deploy-service:
+    docker:
+      - image: 'circleci/python:3.7.1'
+    steps:
+      - aws-cli/install
+      - aws-cli/configure:
+          aws-access-key-id: $AWS_ACCESS_KEY_ID
+          aws-region: $AWS_REGION
+      - aws-ecs/update-service:
+          family: "${AWS_TASK_DEFINITION}"
+          cluster-name: "${AWS_ECS_CLUSTER_ARN}"
+          force-new-deployment: true
+
 workflows:
-  build-and-deploy:
+  build:
     jobs:
       - aws-ecr/build-and-push-image:
           repo: "${AWS_ECR_REPO}"
           path: .
-      - aws-cli/install
-      - aws-cli-configure:
-          aws-access-key-id: $AWS_ACCESS_KEY_ID
-          aws-region: $AWS_REGION
-      - aws-ecs/update-service:
-          requires:
-            - aws-ecr/build-and-push-image
-          family: "${AWS_TASK_DEFINITION}"
-          service-name: "${AWS_SERVICE_NAME}"
-          cluster-name: "${AWS_ECS_CLUSTER_ARN}"
-          force-new-deployment: true
-          
+      - deploy-service
