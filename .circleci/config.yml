@@ -194,6 +194,3 @@ workflows:
           filters:
             branches:
               only: master
-      - aws-ecr/build-and-push-image:
-          repo: "${AWS_ECR_REPO}"
-          path: .
