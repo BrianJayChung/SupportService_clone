@@ -1,5 +1,4 @@
 version: 2
-
 jobs:
   test:
     docker:
@@ -166,6 +165,7 @@ jobs:
             cd tests/webdriver
             java -jar target/webdriver-1.0-SNAPSHOT-jar-with-dependencies.jar
 workflows:
+  version: 2
   build_test_deploy:
     jobs:
       - test
