@@ -68,7 +68,6 @@ class DevelopmentConfig(Config):
 
             db.init_app(app)
             db.create_all()
-
             # check if plans exist
             if len(Plan.query.all()) != 4:
                 p1 = Plan(id=1, name='free', description='All the basic features of SupportService', cost=0)
