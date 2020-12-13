@@ -12,8 +12,7 @@ jobs:
       - checkout
       - aws-cli/setup:
           profile-name: circle-ci
-      - run: aws deploy create-deployment --application-name AppECS-flask-app-cluster-ss-blue-green --deployment-group-name DgpECS-flask-app-cluster-ss-blue-green --revision revisionType=S3,s3Location="{bucket=support-service-codedeploy,key=appspec.yaml,bundleType=yaml}”
-
+      - run: aws deploy create-deployment --application-name AppECS-flask-app-cluster-ss-blue-green --deployment-group-name DgpECS-flask-app-cluster-ss-blue-green --revision revisionType=S3,s3Location="{bucket=support-service-codedeploy,key=appspec.yaml,bundleType=yaml}"
 
 workflows:
   build-and-deploy:
@@ -23,4 +22,5 @@ workflows:
           dockerfile: Dockerfile.ecr
       - aws-cli-deploy:
           requires:
-            - aws-ecr/build-and-push-image         
+            - aws-ecr/build-and-push-image   
+         
