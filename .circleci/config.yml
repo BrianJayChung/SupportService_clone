@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@6.14.0
   aws-ecs: circleci/aws-ecs@01.4.0
+  aws-code-deploy: circleci/aws-code-deploy@1.0.1
 
 workflows:
   build-and-deploy:
@@ -16,4 +17,13 @@ workflows:
           family: "${AWS_TASK_DEFINITION}"
           service-name: "${AWS_SERVICE_NAME}"
           cluster-name: "${AWS_ECS_CLUSTER_ARN}"
-          container-image-name-updates: "container=${AWS_ECR_REPO},tag=${CIRCLE_SHA1}"
+          container-image-name-updates: "container=${AWS_ECS_CONTAINER},tag=${CIRCLE_SHA1}"
+      - aws-code-deploy/deploy:
+          requires:
+            - aws-ecs/deploy-service-update
+          application-name: AppECS-flask-app-cluster-ss-blue-green
+          bundle-bucket: support-service-codedeploy
+          bundle-key: appspec.yml
+          bundle-type: yaml
+          deployment-group: DgpECS-flask-app-cluster-ss-blue-green
+          service-role-arn: arn:aws:iam::955116512041:role/ecsCodeDeployRole

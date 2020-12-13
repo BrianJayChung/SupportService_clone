@@ -3,7 +3,7 @@ Resources:
   - TargetService:
       Type: AWS::ECS::Service
       Properties:
-        TaskDefinition: "arn:aws:ecs:us-west-2:955116512041:task-definition/support-service-app:2"
+        TaskDefinition: "arn:aws:ecs:us-west-2:955116512041:task-definition/support-service-app:11"
         LoadBalancerInfo:
           ContainerName: "support-service"
           ContainerPort: 5000
