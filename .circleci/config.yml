@@ -11,16 +11,9 @@ workflows:
       - aws-ecr/build-and-push-image:
           repo: "${AWS_ECR_REPO}"
           dockerfile: Dockerfile.ecr
-      - aws-ecs/deploy-service-update:
-          requires:
-            - aws-ecr/build-and-push-image
-          family: "${AWS_TASK_DEFINITION}"
-          service-name: "${AWS_SERVICE_NAME}"
-          cluster-name: "${AWS_ECS_CLUSTER_ARN}"
-          container-image-name-updates: "container=${AWS_ECS_CONTAINER},tag=${CIRCLE_SHA1}"
       - aws-code-deploy/deploy:
           requires:
-            - aws-ecs/deploy-service-update
+            - aws-ecr/build-and-push-image
           application-name: AppECS-flask-app-cluster-ss-blue-green
           bundle-bucket: support-service-codedeploy
           bundle-key: appspec.yml
