@@ -1,9 +1,19 @@
 version: 2.1
-
 orbs:
   aws-ecr: circleci/aws-ecr@6.14.0
   aws-ecs: circleci/aws-ecs@01.4.0
   aws-code-deploy: circleci/aws-code-deploy@1.0.1
+  aws-cli: circleci/aws-cli@1.3.1
+
+jobs:
+  aws-cli-deploy:
+    executor: aws-cli/default
+    steps:
+      - checkout
+      - aws-cli/setup:
+          profile-name: circle-ci
+      - run: aws deploy create-deployment --application-name AppECS-flask-app-cluster-ss-blue-green --deployment-group-name DgpECS-flask-app-cluster-ss-blue-green --revision revisionType=S3,s3Location="{bucket=support-service-codedeploy,key=appspec.yaml,bundleType=yaml}”
+
 
 workflows:
   build-and-deploy:
@@ -11,13 +21,6 @@ workflows:
       - aws-ecr/build-and-push-image:
           repo: "${AWS_ECR_REPO}"
           dockerfile: Dockerfile.ecr
-      - aws-code-deploy/deploy:
+      - aws-cli-deploy:
           requires:
-            - aws-ecr/build-and-push-image
-          application-name: AppECS-flask-app-cluster-ss-blue-green
-          bundle-bucket: support-service-codedeploy
-          bundle-key: appspec.yml
-          bundle-type: yaml
-          deployment-group: DgpECS-flask-app-cluster-ss-blue-green
-          deployment-config: CodeDeployDefault.ECSLinear10PercentEvery1Minutes
-          service-role-arn: arn:aws:iam::955116512041:role/ecsCodeDeployRole
+            - aws-ecr/build-and-push-image         
