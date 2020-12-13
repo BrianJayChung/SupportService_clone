@@ -19,4 +19,5 @@ workflows:
           bundle-key: appspec.yml
           bundle-type: yaml
           deployment-group: DgpECS-flask-app-cluster-ss-blue-green
+          deployment-config: CodeDeployDefault.ECSLinear10PercentEvery1Minutes
           service-role-arn: arn:aws:iam::955116512041:role/ecsCodeDeployRole
